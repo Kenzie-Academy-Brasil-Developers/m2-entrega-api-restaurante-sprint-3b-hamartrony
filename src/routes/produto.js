@@ -31,7 +31,7 @@ router.get('', (req, res) => {
 
      const requisicao    = req.body
      
-     if(typeof requisicao.calories !== 'number' || typeof requisicao.price !== 'number' ){
+     if(typeof requisicao.calories !== 'number' || typeof requisicao.price !== 'number'){
        
          res.status(400).json("Valores incorretos para numeros")
 
@@ -40,7 +40,7 @@ router.get('', (req, res) => {
         const prod = ProdutoPost.criarProduto(requisicao)
         ProdutoPost.escreverProduto(prod)
 
-        res.status(201).json('received')
+        res.status(201).json(prod)
      }
  })
  
@@ -59,9 +59,10 @@ router.patch('/:id', (req, res) => {
          Write.delete(getId)
 
          Write.escrever(prodEditado)
+         res.status(200).json(prodEditado)
     }
 
-    res.status(200).json('retorno')
+    
  
  })
 

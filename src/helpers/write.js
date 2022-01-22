@@ -23,6 +23,27 @@ class Write{
     
     }
 
+
+    static escreverMesa(req, res){                                                           // ESCREVER NO BANCO
+        
+        const banco     = readFileSync('./src/mock/db.json')
+        const dbRead    =  JSON.parse(banco)
+        
+        if(dbRead.length !==0){
+            const dbInsert  = {"products":[...dbRead.products], "orders":[...dbRead.orders, req]}
+            
+            writeFileSync('./src/mock/db.json', JSON.stringify(dbInsert))
+            
+            
+        
+        }else{
+            const dbInsertFrist = {"products":[...dbRead.products], "orders":[...dbRead.orders, req]}
+            writeFileSync('./src/mock/db.json', JSON.stringify(dbInsertFrist, null, 2))
+        }
+
+    
+    }
+
    
 
     static delete(getId){                                                                   // DELETAR NO BANCO 
@@ -34,6 +55,19 @@ class Write{
         writeFileSync('./src/mock/db.json', JSON.stringify(dbInsert))
 
     }
+
+    static deleteMesa(getId){                                                                   // DELETAR NO BANCO 
+        const banco          = readFileSync('./src/mock/db.json')
+        const dbRead         = JSON.parse(banco)                    //banco em js
+        const prodIndex      = dbRead.orders.findIndex((mesa)=> mesa.id == getId)
+        dbRead.orders.splice(prodIndex,1)
+        const dbInsert =  {'products':[...dbRead.products], "orders":[...dbRead.orders]}
+        writeFileSync('./src/mock/db.json', JSON.stringify(dbInsert))
+
+    }
+
+    
+  
   
 }
 

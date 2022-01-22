@@ -4,8 +4,8 @@ class ProductModel{                                                             
     constructor({name = '', calories = 0, price = '', session = ''}){
         this.id         = this.id() + 1,
         this.name       = name,
-        this._calories   = calories,
-        this._price      = price,
+        this._calories  = calories,
+        this._price     = price,
         this.session    = session
 
     }

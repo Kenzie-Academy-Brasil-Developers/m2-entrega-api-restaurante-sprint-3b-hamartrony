@@ -5,26 +5,28 @@ const {req, res}          = require('express')
 const Read                = require('../helpers/read')
 
 
-// recebe dados do post, e manda criar em models
+
 class ProdutoPost {    
 
-  static criarProduto(data) {                                 // CRIAR PRODUTO 
+  static criarProduto(data, req, res) {                                 // CRIAR PRODUTO 
     const produto     = new ProductModel(data);
     produto.price     = data.price
     produto.calories  = data.calories
 
+    
     return produto
     
   }
 
   static escreverProduto(prod){                               // ESCREVER NO BANCO
     Write.escrever(prod)
+
   }
 
 
   static buscarProduto(id){                                   // BUSCAR NO BANCO
     const data  = Read.lerProductos()                 
-    return data.find((produto) => produto.id == id)   
+    return data.products.find((produto) => produto.id == id)   
   }
 
 
@@ -34,10 +36,10 @@ class ProdutoPost {
           retornoDb.name = request.name
       }
       if(request.calories){
-          retornoDb._calories = request.calories
+          retornoDb._calories = request.calories.toFixed(2)
       }
       if(request.price){
-          retornoDb._price = request.price
+          retornoDb._price = request.price.toFixed(2)
       }
       if(request.session){
           retornoDb.session = request.session

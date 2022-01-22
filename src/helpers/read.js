@@ -7,11 +7,13 @@ class Read{                                                                 // L
         const banco     = readFileSync('./src/mock/db.json')
         const dbRead    = JSON.parse(banco)
         
-
-        return dbRead.products
+       
+        return dbRead
         
 
     }
+
+  
 
 
 
